@@ -1,0 +1,247 @@
+[
+    {
+        "id": "60d568ac4773c70a",
+        "type": "tab",
+        "label": "Plant Watering System",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "2ed6b96e25cc6946",
+        "type": "arduino in",
+        "z": "60d568ac4773c70a",
+        "name": "Soil Moisture Sensor",
+        "pin": "0",
+        "state": "ANALOG",
+        "arduino": "77399c954f25a5f9",
+        "x": 150,
+        "y": 200,
+        "wires": [
+            [
+                "15d1b9857de55b17",
+                "91d374d330b94635",
+                "3adf42ea2680a13c",
+                "a2d97cd3e14ce610"
+            ]
+        ]
+    },
+    {
+        "id": "3ecf04161fff781f",
+        "type": "inject",
+        "z": "60d568ac4773c70a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "moist",
+        "payload": "200",
+        "payloadType": "num",
+        "x": 140,
+        "y": 420,
+        "wires": [
+            [
+                "91d374d330b94635",
+                "3adf42ea2680a13c",
+                "a2d97cd3e14ce610",
+                "15d1b9857de55b17"
+            ]
+        ]
+    },
+    {
+        "id": "15d1b9857de55b17",
+        "type": "switch",
+        "z": "60d568ac4773c70a",
+        "name": "Check soil moisture level",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "lt",
+                "v": "550",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 610,
+        "y": 120,
+        "wires": [
+            [
+                "3baa78df33d7d018"
+            ]
+        ]
+    },
+    {
+        "id": "91d374d330b94635",
+        "type": "ui_gauge",
+        "z": "60d568ac4773c70a",
+        "name": "",
+        "group": "63cdf2d627d8e1cb",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Umidade atual do solo",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "1000",
+        "colors": [
+            "#b30000",
+            "#e6e600",
+            "#2adf69"
+        ],
+        "seg1": "550",
+        "seg2": "800",
+        "diff": false,
+        "className": "",
+        "x": 620,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "3adf42ea2680a13c",
+        "type": "ui_button",
+        "z": "60d568ac4773c70a",
+        "name": "Pump on",
+        "group": "63cdf2d627d8e1cb",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Ligar bomba d'água",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "255",
+        "payloadType": "num",
+        "topic": "pump",
+        "topicType": "msg",
+        "x": 560,
+        "y": 260,
+        "wires": [
+            [
+                "0c26a2a5c55a3d2e"
+            ]
+        ]
+    },
+    {
+        "id": "0c26a2a5c55a3d2e",
+        "type": "arduino out",
+        "z": "60d568ac4773c70a",
+        "name": "Water pump",
+        "pin": "4",
+        "state": "PWM",
+        "arduino": "66e50dc65ab0e6c0",
+        "x": 910,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "a2d97cd3e14ce610",
+        "type": "ui_button",
+        "z": "60d568ac4773c70a",
+        "name": "Pump off",
+        "group": "63cdf2d627d8e1cb",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Desligar bomba d'água",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "0",
+        "payloadType": "num",
+        "topic": "pump",
+        "topicType": "msg",
+        "x": 560,
+        "y": 320,
+        "wires": [
+            [
+                "0c26a2a5c55a3d2e"
+            ]
+        ]
+    },
+    {
+        "id": "0b6b89fcdb470484",
+        "type": "debug",
+        "z": "60d568ac4773c70a",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "3baa78df33d7d018",
+        "type": "thingspeak42",
+        "z": "60d568ac4773c70a",
+        "name": "Plant Watering System",
+        "delay": "15",
+        "topic1": "moist",
+        "topic2": "",
+        "topic3": "",
+        "topic4": "",
+        "topic5": "",
+        "topic6": "",
+        "topic7": "",
+        "topic8": "",
+        "endpoint": "https://thingspeak.com",
+        "x": 1220,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "77399c954f25a5f9",
+        "type": "arduino-board",
+        "device": "test"
+    },
+    {
+        "id": "63cdf2d627d8e1cb",
+        "type": "ui_group",
+        "name": "Controle de umidade",
+        "tab": "a7a8ef67d9fef3c6",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "66e50dc65ab0e6c0",
+        "type": "arduino-board",
+        "device": "test"
+    },
+    {
+        "id": "a7a8ef67d9fef3c6",
+        "type": "ui_tab",
+        "name": "Umidade do solo",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
