@@ -1,1 +1,1 @@
-Entrega Entrega Pervasive Computing and IOT Applications.
+Entrega Pervasive Computing and IOT Applications.
